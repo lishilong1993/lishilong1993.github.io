@@ -321,244 +321,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="数据结构："><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h2><blockquote>
-<p>数据：信息的载体；整数、字符、字符串、图像、声音</p>
-<p>数据元素：数据的基本单位，一个数据元素由若干个数据项组成；</p>
-<p>数据项：具有独立含义的最小标识单位，可称为：字段、域、属性</p>
-<p>数据结构：数据之间的相互关系，数据的组织形式</p>
-<p>内容：</p>
-<blockquote>
-<p>1、数据的逻辑结构</p>
-<p>2、数据的存储结构</p>
-<p>3、数据的运算</p>
-</blockquote>
-<p>数据结构分类：</p>
-<blockquote>
-<p>1、线性结构</p>
-<p>2、非线性结构</p>
-</blockquote>
-<p>存储方式：</p>
-<blockquote>
-<p>   1、顺序存储</p>
-<p>   2、链接存储</p>
-<p>   3、索引存储</p>
-<p>   4、散列存储</p>
-</blockquote>
-<p>数据类型：</p>
-<blockquote>
-<p>   1、基本数据类型</p>
-<p>   2、聚合数据类型</p>
-</blockquote>
-<p>ADT:抽象数据类型</p>
-<blockquote>
-<p>  数据抽象、数据封装</p>
-</blockquote>
-</blockquote>
-<h3 id="常用数据结构："><a href="#常用数据结构：" class="headerlink" title="常用数据结构："></a>常用数据结构：</h3><blockquote>
-<p> 1、数组（Array）</p>
-<p> 2、栈（Stack）:特殊的线性表；按照后进先出的原则存储数据；没有数据的栈为空栈；</p>
-<p> 3、队列（Queue）:特殊的线性表；按照先进先出的原则存储数据；没有数据的队列为空队列；</p>
-<p> 4、链表（Linked List）:一种数据元素按照链式存储结构进行存储的数据结构，特点为非连续；链表由系列数据结点构成，每个数据结点包括数据域和引用域；引用域保存数据结构下一个元素的存储地址。</p>
-<p> 5、树（Tree）:非线性结构；只有一个根节点</p>
-<p> 6、图（Graph）:非线性结构；数据节点成为顶点，边是顶点的有序偶对；顶点间有边表示两个顶点具有相邻关系。</p>
-<p> 7、堆（Heap）:树型据结构，一般讨论二叉堆；特点：根节点的值是所有节点中最小或最大的，根节点的两个子树也是堆结构</p>
-<p> 8、散列表（Hash）:如果在结构中存在关键字和T相等的记录，必定在F(T)的存储位置可以找到该记录。可以不用进行比较直接取得记录。</p>
-</blockquote>
-<h3 id="顺序表操作实例代码"><a href="#顺序表操作实例代码" class="headerlink" title="顺序表操作实例代码"></a>顺序表操作实例代码</h3><pre><code>package cn.sunline.oa.test;
-
-import java.util.Scanner;
-
-public class test02List {
-
-public static void main(String[] args) {
-    SLType SL=new SLType();
-
-    System.out.println(&quot;順序表操作演示：&quot;);
-    SL.SLInit(SL);
-    System.out.println(&quot;初始化完成。。&quot;);
-
-    Scanner sc=new Scanner(System.in);
-
-    do{
-        System.out.println(&quot;输入添加的节点信息（学号 姓名 年龄）：&quot;);
-        DATA data=new DATA();
-        data.key=sc.next();
-        data.name=sc.next();
-        data.age=sc.nextInt();
-
-        if(data.age!=0){
-            if(SL.SLAdd(SL, data)==0){
-                break;
-            }
-        }else{
-            break;
-        }
-
-    }while(true);
-    System.out.println(&quot;顺序表中的节点顺序为：&quot;);
-    SL.SLAll(SL);
-
-
-    System.out.println(&quot;要取出节点的序号：&quot;);
-    int i=sc.nextInt();
-
-    DATA pdata=SL.SLFindByNum(SL, i);
-    if(pdata!=null){
-        System.out.println(&quot;第&quot;+i+&quot;个节点为：&quot;+pdata.key+&quot;,&quot;+pdata.name+&quot;,&quot;+pdata.age);
-    }
-
-
-    System.out.println(&quot;要查找的节点关键字：&quot;);
-    String key=sc.next();
-    int j=SL.SLFindByCont(SL, key);
-    DATA pdata1=SL.SLFindByNum(SL, j);
-    if(pdata1!=null){
-        System.out.println(&quot;关键字&quot;+key+&quot;为第&quot;+j+&quot;个节点，该节点为：&quot;+pdata1.key+&quot;,&quot;+pdata1.name+&quot;,&quot;+pdata1.age);
-    }
-
-    System.out.println(&quot;插入节点(节点位置，学号，姓名，年龄)：&quot;);
-    int l=sc.nextInt();
-    DATA data2=new DATA();
-    data2.key=sc.next();
-    data2.name=sc.next();
-    data2.age=sc.nextInt();
-    SL.SLInsert(SL, l, data2);
-
-    System.out.println(&quot;所有节点：&quot;);
-    SL.SLAll(SL);
-}
-}
-
-class DATA{ //节点关键字
- String key;
- String name;
- int age;
-}
-
-class SLType{ //定义顺序表结构
-static final int MAXLEN=100;
-DATA[] ListData=new DATA[MAXLEN+1];//保存顺序表的结构数组
-int ListLen;            //顺序表已存在节点的数量
-
-void SLInit(SLType SL){//初始化顺序表
-    SL.ListLen=0;      //初始化为空表
-}
-
-int SLLength(SLType SL){
-    return SL.ListLen;   //返回顺序表的元素数量
-}
-
-//插入节点
-int SLInsert(SLType SL,int n,DATA data){
-    int i;
-
-    if(SL.ListLen&gt;=MAXLEN){ //顺序表节点数量已超过最大数量
-         System.out.println(&quot;顺序表已满，不能插入节点&quot;);
-         return 0;
-    }
-    if(n&lt;1||n&gt;SL.ListLen-1){
-        System.out.println(&quot;插入元素序号错误，不能插入元素！&quot;);
-        return 0;
-    }
-    for(i=SL.ListLen;i&gt;=n;i--){ //将顺序表中的数据向后移动
-        SL.ListData[i+1]=SL.ListData[i];
-    }
-    SL.ListData[n]=data; //插入节点
-    SL.ListLen++;  //顺序表节点数量增加1
-    return 1;
-}
-
-//追加节点
-int SLAdd(SLType SL,DATA data){ //增加元素到顺序表尾部
-    if(SL.ListLen&gt;=MAXLEN){ 
-        System.out.println(&quot;顺序表已满，不能再添加节点！&quot;);
-        return 0;
-    }
-    SL.ListData[++SL.ListLen]=data;
-    return 1;
-}
-
-//删除节点
-int SLDelete(SLType SL,int n){
-
-    if(n&lt;1||n&gt;SL.ListLen+1){ //删除节点的序号不正确
-        System.out.println(&quot;删除节点序号错误，不能删除节点&quot;);
-        return 0;
-    }
-    for(int i=n;i&lt;SL.ListLen;i++){ //将顺序表中的数据向前移动
-        SL.ListData[i]=SL.ListData[i+1];
-    }
-    SL.ListLen--;
-    return 1;
-}
-
-//根据序号查找节点
-DATA SLFindByNum(SLType SL,int n){
-    if(n&lt;1||n&gt;SL.ListLen+1){
-        System.out.println(&quot;节点序号错误，不能返回节点&quot;);
-        return null;
-    }
-    return SL.ListData[n];
-
-}
-
-//根据关键字查找节点
-int SLFindByCont(SLType SL,String key){
-    for(int i=1;i&lt;=SL.ListLen;i++){
-        if(SL.ListData[i].key.compareTo(key)==0){
-            return i;
-        }
-    }
-    return 0;
-}
-
-//显示表中的所有节点
-int SLAll(SLType SL){
-    for(int i=1;i&lt;=SL.ListLen;i++){
-        System.out.println(SL.ListData[i].key+&quot;,&quot;+SL.ListData[i].name+&quot;,&quot;+SL.ListData[i].age);
-    }
-    return 0;
-}
-}
-</code></pre><h3 id="效果如下："><a href="#效果如下：" class="headerlink" title="效果如下："></a>效果如下：</h3><pre><code>順序表操作演示：
-初始化完成。。
-输入添加的节点信息（学号 姓名 年龄）：
-2012
-lisl
-12
-输入添加的节点信息（学号 姓名 年龄）：
-2011
-lsl
-15
-输入添加的节点信息（学号 姓名 年龄）：
-2013
-loler
-23
-输入添加的节点信息（学号 姓名 年龄）：
-000
-0
-0
-顺序表中的节点顺序为：
-2012,lisl,12
-2011,lsl,15
-2013,loler,23
-要取出节点的序号：
-2
-第2个节点为：2011,lsl,15
-要查找的节点关键字：
-2011
-关键字2011为第2个节点，该节点为：2011,lsl,15
-插入节点(节点位置，学号，姓名，年龄)：
-2
-2015
-lpl
-34
-所有节点：
-2012,lisl,12
-2015,lpl,34
-2011,lsl,15
-2013,loler,23
-</code></pre>
+        <p>这是我在阅读《JAVA常用算法收册》这本书后，为更好的对书中知识有个更深的印象，故做该笔记；但这只是开始的第一部分。<br>
       
     </div>
     
@@ -571,6 +334,10 @@ lpl
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/17/rizhi/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -614,58 +381,7 @@ lpl
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="今日笔记"><a href="#今日笔记" class="headerlink" title="今日笔记"></a>今日笔记</h2><h3 id="中间件产品："><a href="#中间件产品：" class="headerlink" title="中间件产品："></a>中间件产品：</h3><ul>
-<li><p>中间件产品本身的作用就是连接、过渡，为其所属物品实现更好的价值和功用。他可以是一种产品到另一种产品的过渡，像电脑集成显卡到独立显卡的过渡品，亦半集成半独立，也可以是一件产品的成为产品所需的一个的连接部件。这个连接部件的作用就由它被创造出来时赋予的功用来确定了。像我们每个人出身时父母都要起名字一样，成为产品时，已经赋予它责任、功用。</p>
-</li>
-<li><p>介于客户机和服务器之间的夹层，突破了传统的c/s架构，为构建大规模，高性能，分布式c/s应用程序提供了通信，事物，安全，容错等基础服务，屏蔽了底层应用细节，应用程序不必从底层开发，以自身的复杂性换取应用程序开发的简单</p>
-</li>
-</ul>
-<h3 id="Tuxedo-Transaction-for-Unix-has-been-Extended-for-Distributed-Operation"><a href="#Tuxedo-Transaction-for-Unix-has-been-Extended-for-Distributed-Operation" class="headerlink" title="Tuxedo(Transaction for Unix has been Extended for Distributed Operation):"></a>Tuxedo(Transaction for Unix has been Extended for Distributed Operation):</h3><blockquote>
-<p>分布式操作扩展之后的Unix事务系统<br>是一个客户机/服务器的“中间件”产品，它在客户机和服务器之间进行调节，以保证正确地处理事务;<br>是一个事务处理(TP)监督器，它管理联机事务处理(OLTP)系统操作的事务.</p>
-</blockquote>
-<h3 id="Radware硬件负载均衡："><a href="#Radware硬件负载均衡：" class="headerlink" title="Radware硬件负载均衡："></a>Radware硬件负载均衡：</h3><ul>
-<li>Radware+Tuxedo多机组合模式:解决Radware硬件负载均衡需要间断时间的缺点；实现应用不间断运行。</li>
-</ul>
-<h3 id="应用层负载均衡：LBR软负载"><a href="#应用层负载均衡：LBR软负载" class="headerlink" title="应用层负载均衡：LBR软负载"></a>应用层负载均衡：LBR软负载</h3><ul>
-<li>提供主服务器和备份服务器（可以多台），主服务器不可用时，才使用备份服务器。</li>
-</ul>
-<h3 id="对接模式："><a href="#对接模式：" class="headerlink" title="对接模式："></a>对接模式：</h3><ul>
-<li>ATMI:application-to-Transaction Monitor Interface;应用程序到事务监听器接口；调用Tuxedo ATMI函数接入Tuxedo服务。</li>
-<li>WTC:WebLogic Tuxedo Connector；实现WebLogic容器接入Tuxedo服务。</li>
-<li>JOLT:实现JAVA调用Tuxedo服务。</li>
-</ul>
-<h3 id="缓冲区数据类型："><a href="#缓冲区数据类型：" class="headerlink" title="缓冲区数据类型："></a>缓冲区数据类型：</h3><blockquote>
-<p>客户端与服务器，服务器与服务器是由数据缓冲区（通讯报文）来传递数据。</p>
-<pre><code>* STRING:是以空值结尾的单字字符串
-* CARRY:有长度定义的二进制数据
-* VIEW:类似于C的structure
-* FML:固定结构的自定义缓冲 &lt;
-</code></pre></blockquote>
-<h3 id="报文："><a href="#报文：" class="headerlink" title="报文："></a>报文：</h3><ul>
-<li>XML报文：报文头+XML报文体</li>
-<li>JSON报文：</li>
-</ul>
-<h3 id="性能测试："><a href="#性能测试：" class="headerlink" title="性能测试："></a>性能测试：</h3><blockquote>
-<p>可扩展性、可靠性、可维护性、可用性、安全性、兼容性、容灾</p>
-</blockquote>
-<h3 id="批量优化操作："><a href="#批量优化操作：" class="headerlink" title="批量优化操作："></a>批量优化操作：</h3><ul>
-<li><p>接入层——》调度层——》作业层———》数据层</p>
-</li>
-<li><p>批量任务队列—&gt;数据层(确保一个批量任务只能有一个调度JVM执行)—&gt;调度层（调度JVM,调度批量任务）—&gt;作业层（作业JVM，执行批量作业）</p>
-</li>
-</ul>
-<h3 id="大数据批量优化："><a href="#大数据批量优化：" class="headerlink" title="大数据批量优化："></a>大数据批量优化：</h3><ul>
-<li><p>原则：</p>
-<p>  1、水平扩展：通过水平扩展，提升app端、db端吞吐量；</p>
-<p>  2、数据切分：（1）水平切分：分库、分表（2）垂直切分：按业务、产品、功能等维护切分；即按模块分库</p>
-<p>  3、其他：减少数据库的交互次数；离线加工；</p>
-</li>
-<li>优化方法：</li>
-</ul>
-<blockquote>
-<p>1、作业JVM水平扩展  2、DB水平扩展 3、优化逻辑，减少DB交互次数 4、分库  5、分表  6、按功能分库 7、离线加工（将数据从主库中通过ETL工具抽取到大数据平台） </p>
-</blockquote>
-
+        <p>这是阅读相关学习文档做下的笔记，为以后存档，希望以后用得着。<br>
       
     </div>
     
@@ -678,6 +394,10 @@ lpl
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/16/note/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
