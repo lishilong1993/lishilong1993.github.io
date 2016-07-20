@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Linux相关笔记 | ZzMu1ee的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ggggg">
+  <meta name="description" content="这是个人对Linux学习的相关笔记，为以后查询提供方便。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux相关笔记">
 <meta property="og:url" content="http://yoursite.com/2016/03/29/Linux相关笔记/index.html">
 <meta property="og:site_name" content="ZzMu1ee的博客">
-<meta property="og:description" content="ggggg">
-<meta property="og:updated_time" content="2016-07-20T05:38:33.613Z">
+<meta property="og:description" content="这是个人对Linux学习的相关笔记，为以后查询提供方便。">
+<meta property="og:updated_time" content="2016-07-20T06:53:10.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux相关笔记">
-<meta name="twitter:description" content="ggggg">
+<meta name="twitter:description" content="这是个人对Linux学习的相关笔记，为以后查询提供方便。">
   
     <link rel="alternative" href="/atom.xml" title="ZzMu1ee的博客" type="application/atom+xml">
   
@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -206,6 +206,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -214,7 +218,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>公告</em></p>
+        <p>这是个人对Linux学习的相关笔记，为以后查询提供方便。<br><a id="more"></a></p>
+<h2 id="Linux启动过程："><a href="#Linux启动过程：" class="headerlink" title="Linux启动过程："></a>Linux启动过程：</h2><p><strong>过程5个阶段：</strong></p>
+<ol>
+<li>内核的引导</li>
+<li>运行init</li>
+<li>系统初始化</li>
+<li>建立终端</li>
+<li>用户登录系统</li>
+</ol>
+<p><strong>内核引导：</strong></p>
+<p>操作系统（接管硬件）——》读入/boot目录下的内核文件</p>
+<p><strong>运行init：</strong></p>
+<p>操作系统（接管硬件）——》读入/boot目录下的内核文件——》init进程（/etc/inittab）</p>
+<p><strong>运行级别：</strong></p>
+<p>七个运行级别：</p>
+<p>0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</p>
+<p>1：单用户工作状态，root权限，用于系统维护，禁止远程登录</p>
+<p>2：多用户状态（没有NFS）</p>
+<p>3：完全的多用户状态（有NFS）,登录后进入控制台命令模式</p>
+<p>4：系统未使用，保留</p>
+<p>5：X11控制台，登录后进入图形GUI模式</p>
+<p>6：系统正常关闭并重启，默认运行级别不能设为6.否则不能正常启动</p>
+<p>操作系统（接管硬件）——》读入/boot目录下的内核文件——》init进程（/etc/inittab）——》运行级别</p>
+<p><strong>系统初始化：</strong></p>
+<p>操作系统（接管硬件）——》读入/boot目录下的内核文件——》init进程（/etc/inittab）——》运行级别——》/etc/init.d</p>
+<p><strong>建立终端</strong></p>
+<p>用户登录系统</p>
+<p>操作系统（接管硬件）——》读入/boot目录下的内核文件——》init进程（/etc/inittab）——》运行级别——》/etc/init.d——》用户登录</p>
+<p><strong>关机：</strong></p>
+<p>sync 将数据由内存同步到硬盘中</p>
+<p>shutdown 关机指令</p>
+<p>shutdown -h  10 十分钟后关机</p>
+<p>shutdown -h now  立即关机</p>
+<p>shutdown -h 20:25 系统将在今天20:25关机</p>
+<p>shutdown -r now 系统立即重启</p>
+<p>shutdown -r 10 系统十分钟后重启</p>
+<p>reboot 重启 ，等同于 shutdown -r now </p>
+<p>halt 关闭系统；等同于 shutdown -h now 和 poweroff</p>
+<p>注意： 不管是重启系统还是关闭系统，首先要运行sync命令将内存中的数据写到磁盘中。</p>
+<p>通过ll 或 ls -l 显示文件属性：</p>
+<p>第一个字符代表的意思为：</p>
+<p>[d] —— 目录</p>
+<p>[-] —— 文件</p>
+<p>[/] —— 链接文档</p>
+<p>[b] —— 装置文件里的可供存储的接口设备（可随机存取装置）</p>
+<p>[c] —— 装置文件里的串行端口设备，如：键盘 、鼠标</p>
+<p><strong>更改文件属组：</strong></p>
+<p>1.chgrp:更改文件属组</p>
+<p>  chgrp [-R] 属组名  文件名</p>
+<p>【-R】:递归更改文件属组，就是在更改某个目录文件的属组时，加上-R，该目录下的所有文件的属组都更改</p>
+<p>2.chown ：更改文件属主，也可以同时更改文件属组</p>
+<p>  chown  [-R]  属主名  文件名</p>
+<p>  chown  [-R]  属主名：属组名  文件名</p>
+<p>3.chmod :更改文件9个属性</p>
+<p>  chmod  [-R] [权限属性] 文件或目录</p>
+<p>usermod 修改账号</p>
+<p><strong>批量添加用户：</strong></p>
+<p>①、编写一个文本用户文件：</p>
+<p>每一列按照/etc/passwd密码文件的格式书写，注意每个用户的用户名、UID、宿主目录都不可以相同，密码可以为空或x；</p>
+<p>例如：</p>
+<p>user.txt</p>
+<p>user001::600:100:user:/home/user001:/bin/bash</p>
+<p>user002::601:100:user:/home/user002:/bin/bash</p>
+<p>user003::602:100:user:/home/user003:/bin/bash</p>
+<p>user004::603:100:user:/home/user004:/bin/bash</p>
+<p>user005::604:100:user:/home/user005:/bin/bash</p>
+<p>user006::605:100:user:/home/user006:/bin/bash</p>
+<p>②、以root身份执行命令/usr/sbin/newusers，从刚创建的用户文件user.txt导入数据：</p>
+<h1 id="newusers-lt-user-txt"><a href="#newusers-lt-user-txt" class="headerlink" title="newusers &lt; user.txt"></a>newusers &lt; user.txt</h1><p>③、执行命令/usr/sbin/pwunconv</p>
+<p>将/etc/shadow 产生的shadow 密码解码，然后回写到/etc/passwd 中，并将/etc/shadow的shadow密码栏删掉。这是为了方便下一步的密码转换工作，即先取消shadow password功能</p>
+<h1 id="pwunconv"><a href="#pwunconv" class="headerlink" title="pwunconv"></a>pwunconv</h1><p>④、编辑每个用户的密码对照文件</p>
+<p>如：</p>
+<p>user001:密码</p>
+<p>user002:密码</p>
+<p>user003:密码</p>
+<p>user004:密码</p>
+<p>user005:密码</p>
+<p>user006:密码</p>
+<p>⑤、以root身份执行命令/usr/sbin/chpasswd</p>
+<p>创建用户密码，chpasswd 会将经过 /usr/bin/passwd 命令编码过的密码写入/etc/passwd的密码栏</p>
+<p>#pwconv</p>
 
       
     </div>
